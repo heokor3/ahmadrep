@@ -10,6 +10,7 @@ import logging
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
+    # обработчики
     dp.register_message_handler(start, commands=["start"])
     dp.register_callback_query_handler(about, lambda cb: cb.data == "about")
     dp.register_message_handler(info, commands=["info"])
