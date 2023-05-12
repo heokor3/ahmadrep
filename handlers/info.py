@@ -1,4 +1,4 @@
-from aiogram import types
+from aiogram import types, Dispatcher
 from aiogram.utils.markdown import italic, text, bold, spoiler
 
 
@@ -20,3 +20,6 @@ async def info(message: types.Message):
 # @dp.message_handler()
 async def echo(message: types.Message):
     await message.answer(message.text)
+
+def register_info(dp: Dispatcher):
+    dp.register_message_handler(info, commands=[''])

@@ -9,6 +9,7 @@ async def picture(message: types.Message):
             caption="Умный кот 😂😼"
         )
 
+
 # @dp.message_handler(commands=["sticker"])
 async def sticker(message: types.Message):
     await message.answer_sticker("CAACAgIAAxkBAAEIhVxkMuljwGZFnSoou7p4LED1AAHHjWgAAtguAAK1LqFLRUS7pDThxU8vBA")
