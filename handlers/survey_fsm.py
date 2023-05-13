@@ -135,8 +135,9 @@ async def process_lohatron(callback: types.CallbackQuery, state: FSMContext):
             data['lohatron'] = 'urod'
             await callback.message.answer('к сожалению поблизости нет никого кто заинтересовался тобой')
             await state.finish()
-
+# для девушек сделаю позже
 async def process_devushki(callback: types.CallbackQuery, state: FSMContext):
+    '''ответы на выбор девушки'''
     async with state.proxy() as data:
         data['devushki'] = callback.data
         if callback.data == 'dv1':
