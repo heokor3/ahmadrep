@@ -10,8 +10,12 @@ from handlers.survey_fsm import (
     Survey,
     process_gender,
     process_name,
+    process_marry,
+    process_devushki,
+    process_lohatron,
+    process_stpdqstn
     )
-
+from aiogram.contrib.fsm_storage import memory
 from scheduler.reminder import start_reminder
 import logging
 from db.base import (
@@ -36,20 +40,21 @@ if __name__ == "__main__":
     # обработчики
     dp.register_message_handler(start, commands=["start"])
     dp.register_callback_query_handler(show_categories, lambda cb: cb.data == "shop")
-
     dp.register_message_handler(info, commands=["info"])
     dp.register_message_handler(show_categories, commands=["shop"])
-    dp.register_message_handler(show_suveniry, Text(equals="Часы"))
-
+    dp.register_message_handler(show_suveniry, Text(equals="финики"))
     dp.register_message_handler(start_survey, commands='surv')
     dp.register_message_handler(process_age, state=Survey.age)
     dp.register_message_handler(process_name, state=Survey.name)
     dp.register_message_handler(process_gender, state=Survey.gender)
+    dp.register_message_handler(process_marry, state=Survey.marry)
+    dp.register_message_handler(process_devushki, state=Survey.devushki)
+    dp.register_message_handler(process_stpdqstn, state=Survey.stpdqstn)
+    dp.register_message_handler(process_lohatron, state=Survey.lohatron)
     dp.register_message_handler(start_reminder, Text(startswith='напомни'))
     dp.register_message_handler(show_cars, commands=['cars'])
-    # dp.register_message_handler(yes_no, commands=['забанить'], commands_prefix=['!'])
-    # dp.register_message_handler(filter_messages)
+
 
     dp.register_message_handler(echo)
     scheduler.start()
-    executor.start_polling(dp, on_startup=startup)
+    executor.start_polling(dp, )

@@ -14,3 +14,4 @@ async def picture(message: types.Message):
 async def sticker(message: types.Message):
     await message.answer_sticker("CAACAgIAAxkBAAEIhVxkMuljwGZFnSoou7p4LED1AAHHjWgAAtguAAK1LqFLRUS7pDThxU8vBA")
     await message.answer("Sticker cat")
+
