@@ -9,11 +9,12 @@ async def start(message: types.Message):
         types.InlineKeyboardButton("О нас", callback_data="about"),
         types.InlineKeyboardButton("Наш сайт", url="https://google.com")
     )
+    await message.answer('наш адрес: Соликамская 13', reply_markup=kb)
     # print(dir(message.from_user))
     first_name = message.from_user.first_name
     id = message.from_user.id
     await message.answer(
-        "Приветствуем тебя, пользователь {first_name}, {id}",
+        f"Приветствуем тебя, пользователь {first_name}, {id}",
         reply_markup=kb
     )
 

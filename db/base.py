@@ -23,10 +23,10 @@ def create_tables():
         name TEXT,
         age INTEGER,
         gender TEXT,
-        stpdqstn TEXT,
-        devushki TEXT,
-        lohatron TEXT,
         marry TEXT,
+        obman TEXT,
+        lohatron TEXT,
+        devushki TEXT
     )""")
     cursor.execute("""CREATE TABLE IF NOT EXISTS products(
         product_id INTEGER PRIMARY KEY,
@@ -58,14 +58,14 @@ def get_products():
 def insert_survey(data):
     init_db()
     cursor.execute("""
-    INSERT INTO survey(name, age, gender, stpdqstn, devushki, lohatron, marry)
-        VALUES (:name, :age, :gender, :stpdqstn, :devushki, :lohatron, :marry)
+    INSERT INTO survey(name, age, gender, marry, obman, lohatron, devushki)
+        VALUES (:name, :age, :gender, :marry, :obman, :lohatron, :devushki)
 
     """, {
         'name': data['name'],
         'age': data['age'],
         'gender': data['gender'],
-        'stpdqstn': data['stpdqstn'],
+        'obman': data['obman'],
         'devushki': data['devushki'],
         'lohatron': data['lohatron'],
         'marry': data['marry']
