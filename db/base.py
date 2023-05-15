@@ -23,10 +23,10 @@ def create_tables():
         name TEXT,
         age INTEGER,
         gender TEXT,
-        marry TEXT,
-        obman TEXT,
-        lohatron TEXT,
-        devushki TEXT
+        interested TEXT,
+        photo TEXT,
+        submit TEXT,
+        cancel TEXT
     )""")
     cursor.execute("""CREATE TABLE IF NOT EXISTS products(
         product_id INTEGER PRIMARY KEY,
@@ -42,64 +42,57 @@ def delete_products():
     db.commit()
 
 
-def insert_products():
-    cursor.execute("""INSERT INTO products(name, price, photo)
-        VALUES ('Самый лучший финик', 200, 'images/самый лучший финик.jpeg'),
-        ('Самый дорогой финик', 400, 'images/самый дорогой финик.jpg')
+# def insert_products():
+#     cursor.execute("""INSERT INTO products(name, price, photo)
+#         VALUES ('Самый лучший финик', 200, 'images/самый лучший финик.jpeg'),
+#         ('Самый дорогой финик', 400, 'images/самый дорогой финик.jpg')
+#     """)
+#     db.commit()
+def insert_product():
+    db, cursor = init_db()
+    cursor.execute("""
+        INSERT INTO products(name, price, image) 
+        VALUES ('Самый лучший финик', 200, './images/самый лучший финик.jpg')
     """)
+    cursor.execute("""
+        INSERT INTO products(name, price, image) 
+        VALUES ('Самый дорогой финик', 500, './images/самый дорогой финик.jpg')
+    """)
+    # cursor.execute("""
+    #     INSERT INTO products(name, price, image)
+    #     VALUES ('Самый обычный финик', 130, './images/img_1.png')
+    # """)
+    # cursor.execute("""
+    #     INSERT INTO products(name, price, image)
+    #     VALUES ('Самый дешевый финик', 20, './images/img_2.png')
+    # """)
     db.commit()
 
-
 def get_products():
-    init_db()
-    cursor.execute("""SELECT * FROM products""")
+    db, cursor = init_db()
+    cursor.execute("SELECT * FROM products")
     return cursor.fetchall()
+# def get_products():
+#     init_db()
+#     cursor.execute("""SELECT * FROM products""")
+#     return cursor.fetchall()
 '''исправил фсм'''
 def insert_survey(data):
     init_db()
     cursor.execute("""
-    INSERT INTO survey(name, age, gender, marry, obman, lohatron, devushki)
-        VALUES (:name, :age, :gender, :marry, :obman, :lohatron, :devushki)
+    INSERT INTO survey(name, age, gender, interested, photo, submit, cancel)
+        VALUES (:name, :age, :gender, :interested, :photo, :submit, :cancel)
 
     """, {
         'name': data['name'],
         'age': data['age'],
         'gender': data['gender'],
-        'obman': data['obman'],
-        'devushki': data['devushki'],
-        'lohatron': data['lohatron'],
-        'marry': data['marry']
-
+        'interested': data['interested'],
+        'photo': data['photo'],
+        'submit': data['submit'],
+        'cancel': data['cancel'],
     })
     db.commit()
-
-
-def create_table_cars():
-    init_db()
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS dictionary (
-        product_id INTEGER PRIMARY KEY,
-        name TEXT,
-        price TEXT,
-        description TEXT,
-        link TEXT UNIQUE
-    )
-    """)
-    db.commit()
-
-
-# Вставка данных
-def pop_cars(data1):
-    init_db()
-    for item in data1:
-        cursor.execute("""
-        INSERT OR IGNORE INTO dictionary (name, price, description, link)
-        VALUES (?, ?, ?, ?)
-        """, (item["name"], item["price"], item["descr"], item["link"]))
-
-    db.commit()
-
-
 def get_data():
     init_db()
     cursor.execute(
@@ -112,7 +105,6 @@ def get_data():
 if __name__ == "__main__":
     init_db()
     create_tables()
-    # insert_products()
-    create_table_cars()
+    insert_product()
 
 

@@ -14,7 +14,7 @@ async def start_reminder(message: types.Message):
 
 async def remind_handler(text, chat_id,):
     """
-        функция удаляет "Напомнить" и отправляет его
+        функция срезает слово "Напомнить" и отправляет его
         """
     print('ok')
     await bot.send_message(
